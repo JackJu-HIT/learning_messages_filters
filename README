@@ -1,0 +1,15 @@
+
+# instruction
+  之前做了深度相机kinect v2.0通过鼠标点击图像即可确定物体的距离信息和坐标信息。分析其中的源码，发现，它是将点云图和RGB图进行了时间的同步，点云提供了坐标信息xyz，你点击图像他会匹配到点云图然后通过解算输出坐标和距离参见我上次博客https://blog.csdn.net/qq_40464599/article/details/107557651。
+
+    所以，在这里我所感兴趣的是时间同步问题，之前做传感器融合的自动驾驶算法时，基于卡尔曼滤波融合激光雷达和毫米波雷达两种传感器信息，实际上使用的是异步融合，所谓异步就是这一次使用激光雷达作为卡尔曼的测量更新，下一次就会使用毫米波雷达进行测量更新，如此交替反复。同步融合显然要比异步融合好得多，但是难点如何将两传感器时间对其即时间同步是一个很大的问题。
+
+     所以ROS中的message_filters就是来解决这个问题。
+
+    本文主要参考了http://wiki.ros.org/message_filters。这里上面写的比较清楚。我这里就是利用IMU和GPS验证了时间不同步和同步两种情况。不同步时候，不会有输出，同步才会有输出。
+
+# 详细技术说明参见  https://blog.csdn.net/qq_40464599/article/details/107574810
+#使用说明
+启动：rosrun learning_messages_filters publish  发布同步的imu和gps信息
+启动：rosrun learning_messages_filters learning_message_filters   订阅同步二者信息
+
