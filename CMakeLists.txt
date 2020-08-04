@@ -151,13 +151,9 @@ include_directories(
 #   ${catkin_LIBRARIES}
 # )
 add_executable(learning_message_filters src/learning_message_filters.cpp)
-target_link_libraries(learning_message_filters
-  ${catkin_LIBRARIES} 
-)
+target_link_libraries(learning_message_filters ${catkin_LIBRARIES})
 add_executable(publish src/publish.cpp)
-target_link_libraries(publish
-  ${catkin_LIBRARIES} 
-)
+target_link_libraries(publish ${catkin_LIBRARIES})
 #############
 ## Install ##
 #############
